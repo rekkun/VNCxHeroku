@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen tightvncserver | indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen vnc4server xfce4 xfce4-goodies | indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.apt/var/run/vnc4server
 
@@ -51,6 +51,8 @@ export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.a
 export PYTHONPATH="\$HOME/.apt/usr/lib/python2.7/dist-packages"
 export SCREENDIR="\$HOME/.apt/var/run/screen"
 export VNCDIR="\$HOME/.apt/var/run/vnc"
+export XFCE4DIR="\$HOME/.apt/var/run/xfce4"
+export XFCE4-GOODIESDIR="\$HOME/.apt/var/run/xfce4-goodies"
 EOF
 
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
