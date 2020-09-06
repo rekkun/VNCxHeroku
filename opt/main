@@ -32,7 +32,7 @@ vncpasswd_pid=$!
 echo "done"
 
 # Start VNC server
-vnc_cmd="vnc4server -geometry 1366x768 -depth 24"
+vnc_cmd="vncserver -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
 eval $vnc_cmd
 vnc_pid=$!
