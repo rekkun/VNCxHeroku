@@ -78,7 +78,7 @@ fi
 
 mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/main ]        && cp $OPT_DIR/main $BUILD_DIR/bin
-[ ! -f $BUILD_DIR/passwd ]        && cp $OPT_DIR/passwd $HOME/.apt/var/run/vnc
+[ ! -f $BUILD_DIR/passwd ]        && cp $OPT_DIR/passwd $HOME/.vnc
 [ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
 
 chmod +x $BUILD_DIR/bin/main
