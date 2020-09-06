@@ -65,7 +65,11 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
 
 echo -n "-----> Setting up ngrok... "
-cat <<EOF >$BUILD_DIR/bin/ngrok.conf
+vncpasswd -f
+echo "done"
+
+echo -n "-----> Setting up password VNC... "
+cat <<EOF >$BUILD_DIR/bin/vncpasswd
 export web_addr: 0.0.0.0:5901
 EOF
 echo "done"
