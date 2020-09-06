@@ -28,14 +28,14 @@ main_pid=$!
 #Setting up password for VNC
 echo -n "-----> Setting up password for VNC... "
 vncpasswd_cmd = "echo -e \"123456\n123456\" | vncpasswd"
-eval "$vncpasswd_cmd | tee vncpasswd.log &"
+eval $vncpasswd_cmd
 vncpasswd_pid=$!
 echo "done"
 
 # Start VNC server
 vnc_cmd="vnc4server -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
-eval "$vnc_cmd | tee vnc.log &"
+eval $vnc_cmd
 vnc_pid=$!
 
 # Start the TCP tunnel
