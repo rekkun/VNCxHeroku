@@ -25,14 +25,8 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
-#Setting up password for VNC
-echo -n "-----> Setting up password for VNC... "
-eval "echo \"123456\" | vncpasswd -f"
-vncpasswd_pid=$!
-echo "done"
-
 # Start VNC server
-vnc_cmd="vncserver -geometry 1366x768 -depth 24"
+vnc_cmd="echo -e \"123456\n123456\" | vncserver -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
 eval $vnc_cmd
 vnc_pid=$!
