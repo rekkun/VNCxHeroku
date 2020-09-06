@@ -70,6 +70,20 @@ export web_addr: 0.0.0.0:5901
 EOF
 echo "done"
 
+echo -n "-----> Setting up password for VNC... "
+prog=/usr/bin/vncpasswd
+mypass="123456"
+/usr/bin/expect <<EOF
+spawn "$prog"
+expect "Password:"
+send "$mypass\r"
+expect "Verify:"
+send "$mypass\r"
+expect eof
+exit
+EOF
+echo "done"
+
 if [ -n "${EULA:-""}" ]; then
   echo -n "-----> Accepting EULA... "
   echo "eula=true" >> $BUILD_DIR/eula.txt
@@ -78,7 +92,6 @@ fi
 
 mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/main ]        && cp $OPT_DIR/main $BUILD_DIR/bin
-[ ! -f $BUILD_DIR/passwd ]        && cp $OPT_DIR/passwd $HOME/.vnc
 [ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
 
 chmod +x $BUILD_DIR/bin/main

@@ -25,8 +25,6 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
-echo $PATH
-
 # Start VNC server
 vnc_cmd="vnc4server -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
