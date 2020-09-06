@@ -72,7 +72,7 @@ echo "done"
 echo -n "-----> Setting up password for VNC... "
 prog=/usr/bin/vncpasswd
 mypass="123456"
-$HOME/.apt/usr/bin/expect <<EOF
+expect <<EOF
 spawn "$prog"
 expect "Password:"
 send "$mypass\r"
