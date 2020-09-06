@@ -50,7 +50,7 @@ export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
 export PYTHONPATH="\$HOME/.apt/usr/lib/python2.7/dist-packages"
 export SCREENDIR="\$HOME/.apt/var/run/screen"
-export VNCDIR="\$HOME/.apt/var/run/vnc"
+export VNCDIR="\$HOME/.vnc"
 export XFCE4DIR="\$HOME/.apt/var/run/xfce4"
 export XFCE4-GOODIESDIR="\$HOME/.apt/var/run/xfce4-goodies"
 EOF
