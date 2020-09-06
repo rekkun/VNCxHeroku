@@ -27,7 +27,7 @@ main_pid=$!
 
 #Setting up password for VNC
 echo -n "-----> Setting up password for VNC... "
-eval "echo -e \"123456\n123456\" | vncpasswd"
+eval "echo \"123456\" | vncpasswd -f"
 vncpasswd_pid=$!
 echo "done"
 
