@@ -1,14 +1,13 @@
 {
-  "name": "Minecraft",
-  "description": "A Minecraft Server on Heroku",
+  "name": "VPS",
+  "description": "Heroku VPS",
   "keywords": [
-    "games",
-    "minecraft"
+    "vps"
   ],
-  "repository": "https://github.com/jkutner/heroku-buildpack-minecraft",
+  "repository": "https://github.com/rekkun1-xkx-me/VNCxHeroku",
   "env": {
     "EULA": {
-      "description": "Do you accept the Minecraft EULA?",
+      "description": "Do you accept the EULA?",
       "value": "true"
     },
     "NGROK_API_TOKEN": {
@@ -19,9 +18,6 @@
   "buildpacks": [
     {
       "url": "heroku/python"
-    },
-    {
-      "url": "heroku/jvm"
     },
     {
       "url": "heroku-community/inline"
