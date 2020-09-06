@@ -35,9 +35,8 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen tigervnc-server xfce4 xfce4-goodies| indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen tigervnc-standalone-server tigervnc-xorg-extension tigervnc-viewer xfce4 xfce4-goodies| indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
-mkdir -p $BUILD_DIR/.apt/var/run/tigervnc-server
 
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
