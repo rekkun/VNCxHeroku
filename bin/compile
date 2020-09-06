@@ -68,13 +68,6 @@ export web_addr: 0.0.0.0:5901
 EOF
 echo "done"
 
-echo -n "-----> Setting up password for VNC... "
-vncpasswd << EOF
-123456
-123456
-EOF
-echo "done"
-
 if [ -n "${EULA:-""}" ]; then
   echo -n "-----> Accepting EULA... "
   echo "eula=true" >> $BUILD_DIR/eula.txt
