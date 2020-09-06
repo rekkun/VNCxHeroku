@@ -32,7 +32,7 @@ eval "$vnc_cmd | tee vnc.log &"
 vnc_pid=$!
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug tcp 5901 -config=$BUILD_DIR/bin/ngrok.conf"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug tcp 5901 -config=bin/ngrok.conf"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!

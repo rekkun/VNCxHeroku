@@ -38,6 +38,7 @@ apt-get $APT_OPTIONS update -y | indent
 apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen vnc4server xfce4 xfce4-goodies expect| indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.apt/var/run/vnc4server
+mkdir -p $BUILD_DIR/.apt/var/run/expect
 
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
@@ -71,7 +72,7 @@ echo "done"
 echo -n "-----> Setting up password for VNC... "
 prog=/usr/bin/vncpasswd
 mypass="123456"
-/usr/bin/expect <<EOF
+$HOME/.apt/usr/bin/expect <<EOF
 spawn "$prog"
 expect "Password:"
 send "$mypass\r"
