@@ -25,9 +25,15 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
+# Start Virtual Framebuffer 'fake' X server
+echo "Start Virtual Framebuffer 'fake' X server..."
+vnc_cmd="Xvfb :1 -screen 1 1920x1080x32"
+eval $vnc_cmd
+vnc_pid=$!
+
 # Start VNC server
 echo "Start VNC server..."
-vnc_cmd="x11vnc -display :0 -forever -geometry 1360x768 -rfbport 5901"
+vnc_cmd="x11vnc -display :1 -forever -geometry 1360x768 -rfbport 5901"
 eval $vnc_cmd
 vnc_pid=$!
 
