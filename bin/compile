@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-input-mouse and xserver-xorg-input-vmmouse xserver-xorg-input-void xserver-xorg-video-dummy xserver-xorg-video-fbdev xserver-xorg-core xserver-xorg-video-intel xserver-xorg-video-nvidia | indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-input-mouse xserver-xorg-input-vmmouse xserver-xorg-input-void xserver-xorg-video-dummy xserver-xorg-video-fbdev xserver-xorg-core xserver-xorg-video-intel xserver-xorg-video-nvidia | indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.apt/var/run/xvfb
 
@@ -80,7 +80,7 @@ mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/config-ngrok.yml ]        && cp $OPT_DIR/config-ngrok.yml $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
 
-cp -r $HOME/.apt/usr/lib/xorg /usr/lib
-cp -r $HOME/.apt/usr/bin/Xorg /usr/bin
+cp -fr $HOME/.apt/usr/lib/xorg\ /usr/lib
+cp -fr $HOME/.apt/usr/bin/Xorg\ /usr/bin
 
 chmod +x $BUILD_DIR/bin/main
