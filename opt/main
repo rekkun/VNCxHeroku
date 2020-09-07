@@ -34,7 +34,7 @@ eval $vnc_cmd
 vnc_pid=$!
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml"
+ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml vnc"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
