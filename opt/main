@@ -27,13 +27,13 @@ main_pid=$!
 
 # Start Virtual Framebuffer 'fake' X server
 echo "Start Virtual Framebuffer 'fake' X server..."
-xvfb_cmd="Xvfb -screen 1360x768x32 -fbdir $HOME/.apt/var/run/xvfb -nolisten unix"
+xvfb_cmd="X :1 -screen 1360x768x32 -fbdir $HOME/.apt/var/run/xvfb -nolisten unix"
 eval $xvfb_cmd
 xvfb_pid=$!
 
 # Start VNC server
 echo "Start VNC server..."
-vnc_cmd="x11vnc -display :0 -forever -geometry 1360x768 -rfbport 5901"
+vnc_cmd="x11vnc -display :1 -forever -geometry 1360x768 -rfbport 5901"
 eval $vnc_cmd
 vnc_pid=$!
 

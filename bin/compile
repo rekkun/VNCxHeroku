@@ -50,7 +50,7 @@ export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
 export PYTHONPATH="\$HOME/.apt/usr/lib/python2.7/dist-packages"
 export SCREENDIR="\$HOME/.apt/var/run/screen"
-export SCREENDIR="\$HOME/.apt/var/run/xvfb"
+export XVFBDIR="\$HOME/.apt/var/run/xvfb"
 export VNCDIR="\$HOME/.vnc"
 EOF
 
@@ -65,7 +65,7 @@ echo "done"
 
 echo -n "-----> Setting up ngrok... "
 cat <<EOF >$BUILD_DIR/bin/ngrok.conf
-export web_addr: 0.0.0.0:5901
+web_addr: 0.0.0.0:5901
 EOF
 echo "done"
 
