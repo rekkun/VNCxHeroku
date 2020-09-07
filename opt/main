@@ -38,10 +38,10 @@ VIRTUAL=VIRTUAL1
 xrandr --newmode ${MODE} 2> /dev/null
 xrandr --addmode ${VIRTUAL} ${MODE_NAME} 2> /dev/null
 xrandr --output ${VIRTUAL} --right-of ${PRIMARY}
-LOG=/var/log/x11vnc.log
+LOG=$BUILD_DIR/bin/log/x11vnc.log
 if [[ ! -f "${LOG}" ]]; then
-	sudo touch ${LOG}
-	sudo chown ${USER}. ${LOG}
+	touch ${LOG}
+	chown ${USER}. ${LOG}
 fi
 x11start_cmd="x11vnc -usepw -noxdamage -bg -forever -display $DISPLAY -rfbport 5901 -clip \"${WIDTH}x${HEIGHT}+${OFFSET}+0\" -o ${LOG}
 xset r"
