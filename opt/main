@@ -26,7 +26,11 @@ eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
 # Start VNC server
-vnc_cmd="echo -e \"123456\n123456\" | vncserver -geometry 1366x768 -depth 24"
+umask 0077                                        # use safe default permissions
+chmod go-rwx "$HOME/.vnc"                         # enforce safe permissions
+vncpasswd -f <<<"123456" >"$HOME/.vnc/passwd"  # generate and write a password
+
+vnc_cmd="vncserver -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
 eval $vnc_cmd
 vnc_pid=$!
