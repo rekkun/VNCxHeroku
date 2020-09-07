@@ -30,14 +30,18 @@ echo "Setting up VNC Password..."
 vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/vncpasswd\""
 
 # Start the VNC Server
-ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -rfbauth \"$BUILD_DIR/bin/vncpasswd\""
+ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -PasswordFile \"$BUILD_DIR/bin/vncpasswd\""
 echo "Starting VNC Server..."
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 5900"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 22"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
+
+# Add new user
+echo "Add new user..."
+eval "adduser rek --gecos \"First Last,RoomNumber,WorkPhone,HomePhone\" --disabled-password"
 
 # Flush the logfile every second, and ensure that the logfile exists
 screen -X "logfile 1" && sleep 1
