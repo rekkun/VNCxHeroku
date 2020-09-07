@@ -26,17 +26,15 @@ eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
 # Start VNC server
-umask 0077                                        # use safe default permissions
-chmod go-rwx "$HOME/.vnc"                         # enforce safe permissions
-vncpasswd -f <<<"123456" >"$HOME/.vnc/passwd"  # generate and write a password
-
-vnc_cmd="vncserver -geometry 1366x768 -depth 24"
 echo "Start VNC server..."
+vncpasswd_cmd="echo -e \"123456\n123456\" | vncpasswd"
+vnc_cmd="vncserver :1 -geometry 1366x768 -depth 24"
+eval $vncpasswd_cmd
 eval $vnc_cmd
 vnc_pid=$!
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug tcp 5901 -config=bin/ngrok.conf"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug -config=bin/config-ngrok.yml"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
