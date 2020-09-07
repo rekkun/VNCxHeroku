@@ -28,10 +28,8 @@ echo "Setting up VNC Password..."
 vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/vncpasswd\""
 
 # Start the VNC Server
-ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -rfbauth \"$HOME/.apt/usr/bin/vncpasswd\""
-echo "Starting ngrok..."
-eval "$ngrok_cmd | tee ngrok.log &"
-ngrok_pid=$!
+ngrok_cmd="tightvncserver -localhost no -rfbport 5901 -geometry 1600×900 -depth 24 -rfbauth \"$BUILD_DIR/bin/vncpasswd\""
+echo "Starting VNC Server..."
 
 # Start the TCP tunnel
 ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml vnc"
