@@ -23,23 +23,8 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
-# Start Virtual Framebuffer 'fake' X server
-WIDTH=1366
-HEIGHT=768
-x11_cmd=x11vnc
-if [[ ! -z $(pgrep ${x11_cmd}) ]]; then
-	pkill ${x11_cmd}
-fi
-MODE=$(gtf ${WIDTH} ${HEIGHT} 60| egrep -v '#' |  awk '{first = $1; $1 = ""; print $0, first; }')
-MODE_NAME=$(echo ${MODE} | awk '{ print $1}')
-OFFSET=$(xrandr | grep primary | awk '{ print $4}' | sed 's/\([0-9]*\)\(.*\)/\1/')
-PRIMARY=$(xrandr | grep primary | awk '{print $1}')
-VIRTUAL=VIRTUAL1
-xrandr --newmode ${MODE} 2> /dev/null
-xrandr --addmode ${VIRTUAL} ${MODE_NAME} 2> /dev/null
-xrandr --output ${VIRTUAL} --right-of ${PRIMARY}
-x11start_cmd="x11vnc -noxdamage -bg -forever -display :0 -rfbport 5901 -geometry ${WIDTH}x${HEIGHT}"
-eval $x11start_cmd
+# Start VNC Server
+vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/passwd\""
 
 # Start the TCP tunnel
 ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml vnc"
