@@ -61,12 +61,6 @@ curl --silent -o ngrok.zip -L "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable
 unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
 
-echo -n "-----> Setting up ngrok... "
-cat <<EOF >$BUILD_DIR/bin/ngrok.conf
-web_addr: 0.0.0.0:5901
-EOF
-echo "done"
-
 if [ -n "${EULA:-""}" ]; then
   echo -n "-----> Accepting EULA... "
   echo "eula=true" >> $BUILD_DIR/eula.txt

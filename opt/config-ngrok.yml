@@ -1,6 +1,6 @@
 authtoken: 1f8dCTISUhNZfMh9d8V1jFZ8Kb8_2isty23kEfMKh1LepPruw
 region: ap
-web_addr: 0.0.0.0:51252
+web_addr: 0.0.0.0:4444
 log_level: debug
 log: stdout
 
@@ -8,4 +8,4 @@ tunnels:
     vnc:
         proto: tcp
         addr: 51252
-        subdomain: testvncheroku
+        remote_addr: 0.tcp.ap.ngrok.io:51252
