@@ -27,7 +27,7 @@ main_pid=$!
 
 # Start Virtual Framebuffer 'fake' X server
 echo "Start Virtual Framebuffer 'fake' X server..."
-xvfb_cmd="Xvfb :1 -screen 1 1920x1080x32"
+xvfb_cmd="Xvfb :1 -screen 1 1920x1080x32 -nolisten unix"
 eval $xvfb_cmd
 xvfb_pid=$!
 
