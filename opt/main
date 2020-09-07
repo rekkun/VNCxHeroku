@@ -23,8 +23,15 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
-# Start VNC Server
+# Set up VNC Password
+echo "Setting up VNC Password..."
 vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/passwd\""
+
+# Start the TCP tunnel
+ngrok_cmd="tightvncserver :0 -localhost no -geometry 1600×900 -depth 24"
+echo "Starting ngrok..."
+eval "$ngrok_cmd | tee ngrok.log &"
+ngrok_pid=$!
 
 # Start the TCP tunnel
 ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml vnc"
