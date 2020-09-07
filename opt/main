@@ -27,7 +27,7 @@ main_pid=$!
 
 # Start VNC server
 echo "Start VNC server..."
-vncpasswd_cmd="echo \"123456\" | tightvncpasswd -f > /app/.apt/usr/bin/passwd"
+vncpasswd_cmd="echo \"123456\" | tightvncpasswd -f > /app/.apt/usr/bin/vncpasswd"
 vnc_cmd="tightvncserver :1 -geometry 800x600 -depth 24"
 eval $vncpasswd_cmd
 eval $vnc_cmd
