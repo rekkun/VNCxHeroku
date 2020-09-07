@@ -80,7 +80,4 @@ mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/config-ngrok.yml ]        && cp $OPT_DIR/config-ngrok.yml $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/index.rhtml ] && cp $OPT_DIR/index.rhtml $BUILD_DIR
 
-cp -favr $HOME/.apt/usr/lib/xorg /usr/lib
-cp -favr $HOME/.apt/usr/bin/Xorg /usr/bin
-
 chmod +x $BUILD_DIR/bin/main
