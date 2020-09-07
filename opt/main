@@ -38,7 +38,7 @@ VIRTUAL=VIRTUAL1
 xrandr --newmode ${MODE} 2> /dev/null
 xrandr --addmode ${VIRTUAL} ${MODE_NAME} 2> /dev/null
 xrandr --output ${VIRTUAL} --right-of ${PRIMARY}
-x11start_cmd="x11vnc -usepw -noxdamage -bg -forever -display $DISPLAY -rfbport 5901 -clip \"${WIDTH}x${HEIGHT}+${OFFSET}+0\" xset r"
+x11start_cmd="x11vnc -display $DISPLAY -rfbport 5901 -noxdamage -bg -forever -geometryn ${WIDTH}x${HEIGHT}"
 eval $x11start_cmd
 
 # Start the TCP tunnel
