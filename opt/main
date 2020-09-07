@@ -34,7 +34,7 @@ ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -rfbauth \
 echo "Starting VNC Server..."
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 5901"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 5900"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
