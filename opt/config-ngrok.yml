@@ -1,11 +1,11 @@
 authtoken: 1f8dCTISUhNZfMh9d8V1jFZ8Kb8_2isty23kEfMKh1LepPruw
 region: ap
-web_addr: 0.0.0.0:5901
+web_addr: 0.0.0.0:51252
 log_level: debug
 log: stdout
 
 tunnels:
     vnc:
         proto: tcp
-        addr: 5901
+        addr: 51252
         subdomain: testvncheroku

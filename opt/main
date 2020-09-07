@@ -28,7 +28,7 @@ echo "Setting up VNC Password..."
 vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/vncpasswd\""
 
 # Start the VNC Server
-ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -rfbauth \"$BUILD_DIR/bin/vncpasswd\""
+ngrok_cmd="tightvncserver -localhost no -rfbport 51252 -geometry 1600×900 -depth 24 -rfbauth \"$BUILD_DIR/bin/vncpasswd\""
 echo "Starting VNC Server..."
 
 # Start the TCP tunnel
