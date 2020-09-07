@@ -35,8 +35,9 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils| indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-video-fbdev| indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
+mkdir -p $BUILD_DIR/.apt/var/run/xvfb
 
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
@@ -49,6 +50,7 @@ export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
 export PYTHONPATH="\$HOME/.apt/usr/lib/python2.7/dist-packages"
 export SCREENDIR="\$HOME/.apt/var/run/screen"
+export SCREENDIR="\$HOME/.apt/var/run/xvfb"
 export VNCDIR="\$HOME/.vnc"
 EOF
 
