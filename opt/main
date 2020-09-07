@@ -27,14 +27,13 @@ main_pid=$!
 
 # Start VNC server
 echo "Start VNC server..."
-vncpasswd_cmd="echo -e \"123456\n123456\" | vncpasswd"
-vnc_cmd="vncserver :1 -geometry 1366x768 -depth 24"
-eval $vncpasswd_cmd
+vncpasswd_cmd="echo \"123456\" | tightvncpasswd -f > $HOME/.vnc/passwd"
+vnc_cmd="tightvncserver :1 -geometry 800x600 -depth 24 -SecurityTypes None"
 eval $vnc_cmd
 vnc_pid=$!
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug -config=bin/config-ngrok.yml"
+ngrok_cmd="bin/ngrok tcp --authtoken $NGROK_API_TOKEN --log stdout --log-level debug --config=bin/config-ngrok.yml"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
