@@ -24,8 +24,8 @@ eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
 # Start Virtual Framebuffer 'fake' X server
-WIDTH=1280
-HEIGHT=800
+WIDTH=1366
+HEIGHT=768
 x11_cmd=x11vnc
 if [[ ! -z $(pgrep ${x11_cmd}) ]]; then
 	pkill ${x11_cmd}
@@ -38,7 +38,7 @@ VIRTUAL=VIRTUAL1
 xrandr --newmode ${MODE} 2> /dev/null
 xrandr --addmode ${VIRTUAL} ${MODE_NAME} 2> /dev/null
 xrandr --output ${VIRTUAL} --right-of ${PRIMARY}
-x11start_cmd="x11vnc -display $DISPLAY -rfbport 5901 -noxdamage -bg -forever -geometryn ${WIDTH}x${HEIGHT}"
+x11start_cmd="x11vnc -noxdamage -bg -forever -display :0 -rfbport 5901 -geometry ${WIDTH}x${HEIGHT}"
 eval $x11start_cmd
 
 # Start the TCP tunnel
