@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-video-fbdev| indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen x11vnc xvfb xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-video-fbdev xserver-xorg-core xserver-xorg-video-intel xserver-xorg-video-nvidia | indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 mkdir -p $BUILD_DIR/.apt/var/run/xvfb
 
