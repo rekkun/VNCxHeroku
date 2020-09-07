@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-chmod 777 /usr
-cp -favr $HOME/.apt/usr/lib/xorg /usr/lib
-cp -favr $HOME/.apt/usr/bin/Xorg /usr/bin
-
-port=${1:-${PORT:-8080}}
-
 if [ -z "$NGROK_API_TOKEN" ]; then
   echo "You must set the NGROK_API_TOKEN config var to create a TCP tunnel!"
   exit 1
@@ -30,16 +24,28 @@ eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
 # Start Virtual Framebuffer 'fake' X server
-echo "Start Virtual Framebuffer 'fake' X server..."
-xvfb_cmd="X :1 -screen 1360x768x32 -fbdir $HOME/.apt/var/run/xvfb -nolisten unix"
-eval $xvfb_cmd
-xvfb_pid=$!
-
-# Start VNC server
-echo "Start VNC server..."
-vnc_cmd="x11vnc -display :1 -forever -geometry 1360x768 -rfbport 5901"
-eval $vnc_cmd
-vnc_pid=$!
+WIDTH=1280
+HEIGHT=800
+x11_cmd=x11vnc
+if [[ ! -z $(pgrep ${x11_cmd}) ]]; then
+	pkill ${x11_cmd}
+fi
+MODE=$(gtf ${WIDTH} ${HEIGHT} 60| egrep -v '#' |  awk '{first = $1; $1 = ""; print $0, first; }')
+MODE_NAME=$(echo ${MODE} | awk '{ print $1}')
+OFFSET=$(xrandr | grep primary | awk '{ print $4}' | sed 's/\([0-9]*\)\(.*\)/\1/')
+PRIMARY=$(xrandr | grep primary | awk '{print $1}')
+VIRTUAL=VIRTUAL1
+xrandr --newmode ${MODE} 2> /dev/null
+xrandr --addmode ${VIRTUAL} ${MODE_NAME} 2> /dev/null
+xrandr --output ${VIRTUAL} --right-of ${PRIMARY}
+LOG=/var/log/x11vnc.log
+if [[ ! -f "${LOG}" ]]; then
+	sudo touch ${LOG}
+	sudo chown ${USER}. ${LOG}
+fi
+x11start_cmd="x11vnc -usepw -noxdamage -bg -forever -display $DISPLAY -rfbport 5901 -clip \"${WIDTH}x${HEIGHT}+${OFFSET}+0\" -o ${LOG}
+xset r"
+eval $x11start_cmd
 
 # Start the TCP tunnel
 ngrok_cmd="bin/ngrok start -config bin/config-ngrok.yml vnc"
@@ -53,7 +59,7 @@ echo "Tailing log"
 eval "tail -f screenlog.0 &"
 tail_pid=$!
 
-trap "kill $xvfb_pid $vnc_pid $ngrok_pid $main_pid $tail_pid" SIGTERM
-trap "kill -9 $xvfb_pid $vnc_pid $ngrok_pid $main_pid $tail_pid; exit" SIGKILL
+trap "kill $ngrok_pid $main_pid $tail_pid" SIGTERM
+trap "kill -9 $ngrok_pid $main_pid $tail_pid; exit" SIGKILL
 
 eval "ruby -rwebrick -e'WEBrick::HTTPServer.new(:BindAddress => \"0.0.0.0\", :Port => 5901, :MimeTypes => {\"rhtml\" => \"text/html\"}, :DocumentRoot => Dir.pwd).start'"
