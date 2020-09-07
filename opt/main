@@ -25,16 +25,15 @@ echo "Starting Screen"
 eval "screen -L -h 2048 -dmS 1"
 main_pid=$!
 
-# Set up VNC Password
-echo "Setting up VNC Password..."
-vnc_cmd="tightvncpasswd -f <<<\"123456\" >\"$HOME/.apt/usr/bin/vncpasswd\""
-
-# Start the VNC Server
-ngrok_cmd="tightvncserver -localhost no -geometry 1600×900 -depth 24 -PasswordFile \"$BUILD_DIR/bin/vncpasswd\""
-echo "Starting VNC Server..."
+# Config RDP
+echo "Config RDP..."
+rdpconfig_cmd="sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh"
+rdp_cmd="systemctl restart xrdp"
+eval $rdpconfig_cmd
+eval $rdp_cmd
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 22"
+ngrok_cmd="bin/ngrok tcp -authtoken $NGROK_API_TOKEN -log stdout --log-level debug ${NGROK_OPTS} 3389"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
