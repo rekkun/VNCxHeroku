@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+chmod 777 /usr
 cp -favr $HOME/.apt/usr/lib/xorg /usr/lib
 cp -favr $HOME/.apt/usr/bin/Xorg /usr/bin
 
