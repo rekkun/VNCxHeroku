@@ -27,7 +27,11 @@ main_pid=$!
 
 # Config RDP
 echo "Config RDP..."
+xfce_env_cmd="echo xfce-session> ~/.xsession"
+ufw_cmd="ufw default allow outgoing && ufw allow 3389/tcp && ufw status"
 rdp_cmd="systemctl restart xrdp"
+eval $xfce_env_cmd
+eval $ufw_cmd
 eval $rdp_cmd
 
 # Start the TCP tunnel
