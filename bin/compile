@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing... "
 apt-get $APT_OPTIONS update -y | indent
-apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen systemd xfce4-terminal xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-input-mouse xserver-xorg-input-void xserver-xorg-video-dummy xserver-xorg-video-fbdev xserver-xorg-core xserver-xorg-video-intel | indent
+apt-get $APT_OPTIONS -y --allow-downgrades --allow-remove-essential --allow-change-held-packages -d install --reinstall screen xrdp systemd xfce4-terminal xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xserver-xorg-input-mouse xserver-xorg-input-void xserver-xorg-video-dummy xserver-xorg-video-fbdev xserver-xorg-core xserver-xorg-video-intel | indent
 mkdir -p $BUILD_DIR/.apt/var/run/screen
 
 mkdir -p $BUILD_DIR/.profile.d
