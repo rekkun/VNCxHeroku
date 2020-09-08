@@ -7,5 +7,4 @@ log: stdout
 tunnels:
     vnc:
         proto: tcp
-        addr: 51252
-        remote_addr: 0.tcp.ap.ngrok.io:51252
+        addr: 0.0.0.0:3389
