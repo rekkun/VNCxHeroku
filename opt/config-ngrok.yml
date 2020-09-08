@@ -5,6 +5,6 @@ log_level: debug
 log: stdout
 
 tunnels:
-    vnc:
+    rdp:
         proto: tcp
         addr: 0.0.0.0:3389

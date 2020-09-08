@@ -33,7 +33,7 @@ eval $rdpconfig_cmd
 eval $rdp_cmd
 
 # Start the TCP tunnel
-ngrok_cmd="bin/ngrok start --config bin/config-ngrok.yml"
+ngrok_cmd="bin/ngrok start -config=$BUILD_DIR/bin/config-ngrok.yml rdp"
 echo "Starting ngrok..."
 eval "$ngrok_cmd | tee ngrok.log &"
 ngrok_pid=$!
